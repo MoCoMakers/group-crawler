@@ -83,6 +83,21 @@ def timestr_to_datetime(date_string):
     parsed_date = parsed_date.astimezone(tz.timezone('US/Eastern'))
     return parsed_date
 
+def parseRSCDateString(full_date):
+    # Input: Oct 30, 2024, 5:00 PM – 6:30 PM
+    date_group = full_date.split(', ')
+    time_group = date_group[2].split(' – ')
+
+    # Target: "Sun, Oct 6, 2024, 11:30 PM UTC"
+
+    start_date_string = "Junk, "+date_group[0]+", "+date_group[1] +", " + time_group[0]+" EST"
+    end_date_string = "Junk, "+date_group[0]+", "+date_group[1] +", "+time_group[1]+" EST"
+
+    startTime = timestr_to_datetime(start_date_string)
+    endTime = timestr_to_datetime(end_date_string)
+
+    return (startTime, endTime)
+
 def json_str_to_datetime(date_string):
     date_format = "%Y-%m-%dT%H:%M:%S%z"
     parsed_date = datetime.datetime.strptime(date_string, date_format)
@@ -173,14 +188,28 @@ def fetch_rsc_website_events(url):
     soup = BeautifulSoup(html, "html.parser")
     # Find the <div> with id 'submain'
     events_widget = soup.find('div', id='wix-events-widget')
-    ul_tag = events_widget.find_next('ul', class_='events-cards')
+    ul_tag = events_widget.find_next('ul', attrs={'data-hook': 'events-cards'})
+    print("before UL")
+    print(ul_tag)
+    events_list = []
     if ul_tag:
         li_tags = ul_tag.findChildren('li', recursive=False)
         for event_li in li_tags:
             title_section = event_li.find('div', attrs={'data-hook': 'title'})
-            print(title_section)
-            # WIP
-            time.sleep(1)
+            event_title = title_section.find('a').text
+            event_link = title_section.find('a')['href']
+            print(event_title)
+            print(event_link)
+            details_section = event_li.find('div', attrs={'data-hook': 'details'})
+            # e.g. Oct 30, 2024, 5:00 PM – 6:30 PM
+            full_date = details_section.find('div', attrs={'data-hook': 'date'} ).text
+            startTime, endTime = parseRSCDateString(full_date)
+            description = details_section.find('div', attrs={'data-hook': 'description'} ).text
+            if not description:
+                description = ""
+
+            current_event = Event(title=event_title, description=description, eventUrl=event_link, startTime=startTime,endTime=endTime)
+            events_list.append(current_event)
     else:
         events_list = [] 
     time.sleep(3)
