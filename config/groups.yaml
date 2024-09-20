@@ -1,0 +1,86 @@
+calendar_groups:
+  1:
+    name: "MoCo Makers"
+    type: "meetup"
+    all_events_url: "https://www.meetup.com/mocomakers/events/"
+    tags:
+      - "core"
+      - "maker"
+      - "tech"
+    priority: 20
+  2:
+    name: "DC Area Drone User Group"
+    type: "meetup"
+    all_events_url: "https://www.meetup.com/dc-area-drone-user-group/events/"
+    tags:
+      - "secondary"
+      - "special-interest"
+      - "tech"
+    priority: 60
+  3:
+    name: "Petri Dish Bio"
+    type: "meetup"
+    all_events_url: "https://www.meetup.com/petri-dish-bio/events/"
+    tags:
+      - "core"
+      - "bio"
+    priority: 10
+  4:
+    name: "Montgomery Cosplay Crafters - MoCoS"
+    type: "meetup"
+    all_events_url: "https://www.meetup.com/cosplay-crafters/events/"
+    tags:
+      - "secondary"
+      - "special-interest"
+      - "cosplay"
+    priority: 70
+  5:
+    name: "Small Business and Startups of Montgomery County"
+    type: "meetup"
+    all_events_url: "https://www.meetup.com/small-business/events/"
+    tags:
+      - "secondary"
+      - "sepecial-interest"
+      - "entrepreneurship"
+    priority: 80
+  6:
+    name: "Rockville Science Center - Makerspace"
+    type: "meetup"
+    all_events_url: "https://www.meetup.com/rockville-rsc/events/"
+    tags:
+      - "secondary"
+      - "sepecial-interest"
+      - "maker"
+    priority: 90
+  7:
+    name: "NoVa Code and Coffee"
+    type: "meetup"
+    all_events_url: "https://www.meetup.com/nova-code-coffee/events/"
+    tags:
+      - "core"
+      - "tech"
+    priority: 40
+  8:
+    name: "Pitch Labs"
+    type: "meetup"
+    all_events_url: "https://www.meetup.com/pitch-labs/events/"
+    tags:
+      - "core"
+      - "entrepreneurship"
+    priority: 30
+  9:
+    name: "Bethesda Data Science"
+    type: "meetup"
+    all_events_url: "https://www.meetup.com/bethesda-data-science/events/"
+    tags:
+      - "secondary"
+      - "sepecial-interest"
+      - "tech"
+    priority: 50
+  10:
+    name: "Rockville Science Center - Storefront"
+    type: "rsc-custom"
+    all_events_url: "https://www.rockvillesciencecenter.org/event-registration"
+    tags:
+      - "tertiary"
+    priority: 100
