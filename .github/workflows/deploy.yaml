@@ -22,7 +22,7 @@ jobs:
         run: |
           echo -e "This step has the prod_pass"
           eval $(ssh-agent -s)
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > /tmp/id_rsa
+          echo "${{ secrets.PROD_PRIVATE_KEY }}" > /tmp/id_rsa
           chmod 600 /tmp/id_rsa
           cat /tmp/id_rsa
           eval $(ssh-agent -s)
