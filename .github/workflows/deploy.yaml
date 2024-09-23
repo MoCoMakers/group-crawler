@@ -17,7 +17,7 @@ jobs:
       prod_url: ${{ secrets.prod_url }}
     steps:
       - if: ${{ env.prod_private_key == '' }}
-        run: echo 'This step will only run if the secret has a value set.'
+        run: echo 'This step will only run if the secret does not have a value set.'
       - if: ${{ env.prod_private_key != '' }}
         run: |
           echo -e "This step has the prod_pass"
