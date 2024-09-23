@@ -10,7 +10,7 @@ import calendarManager as calm
 
 logging.basicConfig(filename='debug.log', level=logging.INFO)
 
-with open('groups.yaml', 'r') as myfile:
+with open('config/groups.yaml', 'r') as myfile:
     group_parameters = yaml.safe_load(myfile)
 
 calendar_groups = group_parameters["calendar_groups"]
