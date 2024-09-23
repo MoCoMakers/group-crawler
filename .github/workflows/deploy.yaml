@@ -1,0 +1,26 @@
+name: deploy-to-server
+on:
+  pull_request:
+    types:
+      - closed
+  push:
+    branches:
+      - main
+      
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      prod_private_key: ${{ secrets.prod_private_key }}
+      prod_user: ${{ secrets.prod_user }}
+      prod_path: ${{ secrets.prod_path }}
+      prod_url: ${{ secrets.prod_url }}
+    steps:
+      - if: ${{ env.prod_private_key == '' }}
+        run: echo 'This step will only run if the secret has a value set.'
+      - if: ${{ env.prod_private_key != '' }}
+        run: |
+          echo -e "This step has the prod_pass"
+          eval $(ssh-agent -s)
+          ssh-add <(echo "$prod_private_key")
+          ssh -o StrictHostKeyChecking=no -p 22 mcmakers_sft_calmakers@calendar.mocomakers.com 'bash -c "/var/www/calendar.mocomakers.com/web/group-crawler/scripts/deployment.sh /var/www/calendar.mocomakers.com/web/group-crawler/ mcmakers_sft_calmakers main"'            

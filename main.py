@@ -262,7 +262,7 @@ if __name__=="__main__":
         cal.add_component(event)
 
     # Write to .ics file
-    with open('my_calendar.ics', 'wb') as f:
+    with open('public/group_calendar.ics', 'wb') as f:
         f.write(cal.to_ical())
 
     print("iCalendar file created successfully.")
