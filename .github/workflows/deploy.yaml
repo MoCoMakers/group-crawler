@@ -24,5 +24,6 @@ jobs:
           eval $(ssh-agent -s)
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > /tmp/id_rsa
           chmod 600 /tmp/id_rsa
+          cat /tmp/id_rsa
           eval $(ssh-agent -s)
           ssh -o StrictHostKeyChecking=no -p 22 mcmakers_sft_calmakers@calendar.mocomakers.com 'bash -c "/var/www/calendar.mocomakers.com/web/group-crawler/scripts/deployment.sh /var/www/calendar.mocomakers.com/web/group-crawler/ mcmakers_sft_calmakers main"'            
