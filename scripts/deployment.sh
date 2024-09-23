@@ -28,8 +28,8 @@ echo "########################"
 echo ""
 
 # Pull down the site files.
-git fetch origin
-git merge --ff origin/$TARGET_BRANCH
+GIT_SSH_COMMAND="ssh -i ~/.ssh/id_ed25519" git fetch origin
+GIT_SSH_COMMAND="ssh -i ~/.ssh/id_ed25519" git merge --ff origin/$TARGET_BRANCH
 
 # Deployment done!
 echo ""
