@@ -21,9 +21,7 @@ jobs:
       - if: ${{ env.prod_private_key != '' }}
         run: |
           echo -e "This step has the prod_pass"
+          echo -e "This step has the prod_pass"
           eval $(ssh-agent -s)
-          echo "${{ secrets.PROD_PRIVATE_KEY }}" > /tmp/id_rsa
-          chmod 600 /tmp/id_rsa
-          cat /tmp/id_rsa
-          eval $(ssh-agent -s)
+          ssh-add <(echo "${{ secrets.PROD_PRIVATE_KEY }}")
           ssh -o StrictHostKeyChecking=no -p 22 mcmakers_sft_calmakers@calendar.mocomakers.com 'bash -c "/var/www/calendar.mocomakers.com/web/group-crawler/scripts/deployment.sh /var/www/calendar.mocomakers.com/web/group-crawler/ mcmakers_sft_calmakers main"'            
