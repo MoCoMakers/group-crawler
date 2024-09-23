@@ -22,5 +22,5 @@ jobs:
         run: |
           echo -e "This step has the prod_pass"
           eval $(ssh-agent -s)
-          ssh-add <(echo "$prod_private_key")
+          ssh-add <(echo "${{ secrets.SSH_PRIVATE_KEY }}")
           ssh -o StrictHostKeyChecking=no -p 22 mcmakers_sft_calmakers@calendar.mocomakers.com 'bash -c "/var/www/calendar.mocomakers.com/web/group-crawler/scripts/deployment.sh /var/www/calendar.mocomakers.com/web/group-crawler/ mcmakers_sft_calmakers main"'            
